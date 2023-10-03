@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kalkulator Zakat Fitrah</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Extension -->
+	<script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+	<script defer src="JS/Typing.js" ></script>
+	<script defer src="JS/Calc/CalcBtn.js" ></script>
+	<script defer src="JS/Calc/CalcTbl.js" ></script>
+	<link rel = "stylesheet" href="Css/Typing.css">
+	<link rel = "stylesheet" href="Css/CalcZFitrah.css">
+	<style>
+		* {
+		  -webkit-user-select: none; /* Safari */
+		  -moz-user-select: none; /* Firefox */
+		  -ms-user-select: none; /* IE10+/Edge */
+		  user-select: none; /* Standard */
+		}
+	</style>
+</head>
+<body>
+	<div id="alertOverlay">
+		<div id="Balert">
+			<p id="alertMessage" class="typedText"></p>
+			<div class="button-container">
+			  <button id="balbtn" onclick="hideCustomAlert()">Ok</button>
+			</div>
+		</div>
+	</div>
+	<div class="fmcont">
+		<a>Kalkulator Zakat Fitrah</a>
+		<a><form id ="formisi">
+			<label for="nama_keluarga">Nama Keluarga:</label><br>
+			<input class="Fisi" type="text" id="nama_keluarga" name="nama_keluarga" required><br><br>
+
+			<label for="jumlah_orang">Jumalah Tanggungan Orang yang dizakati:</label><br>
+			<input class="Fisi" type="number" min="1" id="jumlah_orang" name="jumlah_orang" onkeypress="return isNumberKey(event)" value="1" required><br><br>
+
+			<label for="jenis_makanan">Jenis Makanan Zakat Fitrah:</label>
+			
+			<div class="seform">
+			  <img class="arocon" id="arocon1" src="http://localhost/PWeb%20Zakat/main/img_assets/select/arrow.png">
+			  <select class="Fisi" id="jenis_makanan" name="jenis_makanan" onfocus="rotateArrow()" onblur="resetArrow()">
+				<option value="Beras">Beras</option>
+				<option value="Gandum">Gandum</option>
+				<option value="Jagung">Jagung</option>
+				<option value="Kacang">Kacang</option>
+				<option value="Kurma">Kurma</option>
+				<option value="Makanan Pokok Lainnya">lainnya</option>
+			  </select>
+			</div>
+			<br>
+			<label>Pilihan Jumlah 1 sha dalam kg:</label><br>
+			<input type="radio" id="pilihan_Kg1" name="pilihan_Kg" onclick="onlyOne(this)" value="2.2"><label for="pilihan_Kg1">2,2 Kg</label>
+			<input type="radio" id="pilihan_Kg2" name="pilihan_Kg" onclick="onlyOne(this)" value="2.5" checked><label for="pilihan_Kg2">2,5 Kg</label><br>
+			<input type="radio" id="pilihan_Kg3" name="pilihan_Kg" onclick="onlyOne(this)" value="2.7"><label for="pilihan_Kg3">2,7 Kg</label>
+			<input type="radio" id="pilihan_Kg4" name="pilihan_Kg" onclick="onlyOne(this)" value="3.8"><label for="pilihan_Kg4">3,8 Kg</label>
+			<br><br>
+			
+			<label for="harga_makanan">Harga/kg Jenis Makanan: </label>
+			<br>Rp <input class="Fisi" style="width: 100px" type="number" min="1000" max="2500000" id="harga_makanan" name="harga_makanan" step="50" value="11500" onkeypress="return isNumberKey(event)">-,00<br><br>
+
+			<input type="button" value="Hitung" onclick="hitungZakatFitrah()">
+		</form></a>
+	</div>
+	<div id="Btnct">
+		<button id="btnExport" onclick="exportReportToExcel(this)">EXPORT</button>
+		<!-- tombol delete -->
+		<button class="delete" onclick="enterDeleteMode()">Hapus</button>
+		<button class="cancel" onclick="exitDeleteMode()" style="display: none;" >Batal</button>
+	</div>
+	<!-- tabel -->
+	<div id="TblCont">
+		<table id="tabel_zakat">
+			<tr>
+				<th>Nama Keluarga</th>
+				<th>Jumlah Tanggungan Orang yang dizakati</th>
+				<th>Hitungan 1 Sha</th>
+				<th>Jenis Makanan</th>
+				<th>Harga/Kg</th>
+				<th>Jumlah Kilogram</th>
+				<th>Total Harga</th>
+				<th class="selector">Pilih</th>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
